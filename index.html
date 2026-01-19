@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
+    <link rel="preload" as="image" href="img/hero.jpeg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rotiku - Kehangatan Roti Buatan Rumah Setiap Hari</title>
@@ -8,7 +9,8 @@
     <meta name="description" content="Nikmati kehangatan roti buatan rumah yang segar setiap hari. Pesan sekarang melalui WhatsApp untuk pengiriman kilat.">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,8 +42,18 @@
         }
     </script>
     <script src="https://cdn.tailwindcss.com" defer></script>
-    <link rel="preload" as="image" href="img/hero.jpeg">
-    <style>
+        /* Critical CSS to prevent FOUC and Layout Shift */
+        :root {
+            --primary: #6D4C41;
+            --bg-warm: #FFFDF5;
+            --text-dark: #3E2723;
+        }
+        body {
+            background-color: #FFFDF5;
+            color: #3E2723;
+            margin: 0;
+        }
+
         /* Custom Animation: Soft Bounce */
         @keyframes soft-bounce {
             0%, 100% { transform: translateY(0); }
