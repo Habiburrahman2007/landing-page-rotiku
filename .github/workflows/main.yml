@@ -3,7 +3,7 @@ name: 🚀 Deploy ke CPanel Subdomain
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
