@@ -1,290 +1,571 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rotiku - Kehangatan Roti Buatan Rumah Setiap Hari</title>
-    <link rel="icon" href="img/logo.png">
-    <meta name="description" content="Nikmati kehangatan roti buatan rumah yang segar setiap hari. Pesan sekarang melalui WhatsApp untuk pengiriman kilat.">
-    
+    <link rel="icon" href="img/logo.png" />
+    <meta
+      name="description"
+      content="Nikmati kehangatan roti buatan rumah yang segar setiap hari. Pesan sekarang melalui WhatsApp untuk pengiriman kilat."
+    />
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" as="image" href="img/hero.jpeg" />
+
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6D4C41',
-                        'primary-light': '#8D6E63',
-                        secondary: '#FFCCBC',
-                        accent: '#FF7043',
-                        'bg-warm': '#FFFDF5',
-                        'text-dark': '#3E2723',
-                        'text-muted': '#795548',
-                    },
-                    fontFamily: {
-                        serif: ['Fraunces', 'serif'], // Font tajam & bold untuk judul
-                        sans: ['Montserrat', 'sans-serif'], // Font modern untuk isi
-                    },
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6D4C41",
+              "primary-light": "#8D6E63",
+              secondary: "#FFCCBC",
+              accent: "#FF7043",
+              "bg-warm": "#FFFDF5",
+              "text-dark": "#3E2723",
+              "text-muted": "#795548",
+            },
+            fontFamily: {
+              serif: ["Fraunces", "serif"], // Font tajam & bold untuk judul
+              sans: ["Montserrat", "sans-serif"], // Font modern untuk isi
+            },
+          },
+        },
+      };
     </script>
     <style>
-        /* Custom Animation: Soft Bounce */
-        @keyframes soft-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+      /* Custom Animation: Soft Bounce */
+      @keyframes soft-bounce {
+        0%,
+        100% {
+          transform: translateY(0);
         }
-        .hover-bounce:hover {
-            animation: soft-bounce 0.6s ease-in-out infinite;
+        50% {
+          transform: translateY(-15px);
         }
+      }
+      .hover-bounce:hover {
+        animation: soft-bounce 0.6s ease-in-out infinite;
+      }
 
-        /* Custom Animation: Shake */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-4px); }
-            75% { transform: translateX(4px); }
+      /* Custom Animation: Shake */
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
         }
-        .hover-shake:hover {
-            animation: shake 0.3s ease-in-out infinite;
+        25% {
+          transform: translateX(-4px);
         }
+        75% {
+          transform: translateX(4px);
+        }
+      }
+      .hover-shake:hover {
+        animation: shake 0.3s ease-in-out infinite;
+      }
 
-        .js-hide {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .fade-in {
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      .js-hide {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .fade-in {
+        transition:
+          opacity 0.7s ease-out,
+          transform 0.7s ease-out;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
-</head>
-<body class="font-sans bg-bg-warm text-text-dark overflow-x-hidden">
+  </head>
+  <body class="font-sans bg-bg-warm text-text-dark overflow-x-hidden">
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 bg-bg-warm/75 backdrop-blur-md py-5 transition-all duration-300 shadow-sm">
-        <div class="container mx-auto px-8 md:px-12 max-w-7xl flex justify-between items-center">
-            <div class="logo font-serif text-2xl text-primary font-bold flex items-center">
-                <img src="img/logo.png" alt="Logo" class="w-10 h-10 mr-2">
-                Rotiku
-            </div>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#promo" class="font-semibold hover:text-accent transition-colors">Promo</a>
-                <a href="#produk" class="font-semibold hover:text-accent transition-colors">Produk</a>
-                <a href="#lokasi" class="font-semibold hover:text-accent transition-colors">Lokasi</a>
-                <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20roti%20segar%20hari%20ini." class="inline-block px-6 py-2 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white">Order WA</a>
-            </div>
-            <!-- Mobile Toggle -->
-            <button id="mobile-menu-btn" class="md:hidden text-primary" aria-label="Buka Menu">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-            </button>
+    <nav
+      class="fixed top-0 w-full z-50 bg-bg-warm/75 backdrop-blur-md py-5 transition-all duration-300 shadow-sm"
+    >
+      <div
+        class="container mx-auto px-8 md:px-12 max-w-7xl flex justify-between items-center"
+      >
+        <div
+          class="logo font-serif text-2xl text-primary font-bold flex items-center"
+        >
+          <img src="img/logo.png" alt="Logo" class="w-10 h-10 mr-2" />
+          Rotiku
         </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a
+            href="#promo"
+            class="font-semibold hover:text-accent transition-colors"
+            >Promo</a
+          >
+          <a
+            href="#produk"
+            class="font-semibold hover:text-accent transition-colors"
+            >Produk</a
+          >
+          <a
+            href="#lokasi"
+            class="font-semibold hover:text-accent transition-colors"
+            >Lokasi</a
+          >
+          <a
+            href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20roti%20segar%20hari%20ini."
+            class="inline-block px-6 py-2 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white"
+            >Order WA</a
+          >
+        </div>
+        <!-- Mobile Toggle -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-primary"
+          aria-label="Buka Menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-8 h-8"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </button>
+      </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-bg-warm shadow-xl border-t border-secondary/20 z-[60] overflow-hidden transition-all duration-300">
-            <div class="p-8 flex flex-col space-y-6 text-xl font-bold">
-                <a href="#promo" class="mobile-link hover:text-accent transition-colors">Promo</a>
-                <a href="#produk" class="mobile-link hover:text-accent transition-colors">Produk</a>
-                <a href="#lokasi" class="mobile-link hover:text-accent transition-colors">Lokasi</a>
-                <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20roti%20segar%20hari%20ini." class="inline-block px-6 py-4 rounded-full font-bold bg-primary text-white text-center">Order WA</a>
-            </div>
+      <!-- Mobile Menu Dropdown -->
+      <div
+        id="mobile-menu"
+        class="hidden absolute top-full left-0 w-full bg-bg-warm shadow-xl border-t border-secondary/20 z-[60] overflow-hidden transition-all duration-300"
+      >
+        <div class="p-8 flex flex-col space-y-6 text-xl font-bold">
+          <a
+            href="#promo"
+            class="mobile-link hover:text-accent transition-colors"
+            >Promo</a
+          >
+          <a
+            href="#produk"
+            class="mobile-link hover:text-accent transition-colors"
+            >Produk</a
+          >
+          <a
+            href="#lokasi"
+            class="mobile-link hover:text-accent transition-colors"
+            >Lokasi</a
+          >
+          <a
+            href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20roti%20segar%20hari%20ini."
+            class="inline-block px-6 py-4 rounded-full font-bold bg-primary text-white text-center"
+            >Order WA</a
+          >
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-secondary/30 via-transparent to-transparent"  id="hero">
-        <div class="container mx-auto px-8 md:px-12 max-w-7xl flex flex-col-reverse md:grid md:grid-cols-2 gap-12 items-center">
-            <div class="fade-in">
-                <span class="inline-block px-4 py-1.5 bg-secondary text-primary rounded-full text-sm font-bold mb-6 italic">🏠 Roti Buatan Rumah</span>
-                <h1 class="font-serif text-5xl md:text-6xl leading-tight mb-6">Aroma hangat dari dapur langsung ke mejamu.</h1>
-                <p class="text-lg text-text-muted mb-8 max-w-lg">Tanpa pengawet, dipanggang dengan cinta, dan dikirim saat masih hangat. Karena rumah adalah tempat di mana aroma roti segar berada.</p>
-                <div class="flex flex-wrap gap-4 mb-12">
-                    <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20roti%20segar%20hari%20ini." class="inline-block px-7 py-3 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-accent text-white text-center">Pesan Sekarang</a>
-                    <a href="#promo" class="inline-block px-7 py-3 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer border-2 border-primary text-primary text-center">Lihat Promo</a>
-                </div>
-                <div class="flex gap-10">
-                    <div><strong class="block text-3xl text-primary font-serif counter" data-target="50" data-suffix="+">0+</strong><span class="text-sm text-text-muted">Pesanan/Hari</span></div>
-                    <div><strong class="block text-3xl text-primary font-serif counter" data-target="100" data-suffix="%">0%</strong><span class="text-sm text-text-muted">Bahan Alami</span></div>
-                    <div><strong class="block text-3xl text-primary font-serif counter" data-target="10" data-suffix="+">0+</strong><span class="text-sm text-text-muted">Jenis Roti</span></div>
-                </div>
+    <section
+      class="pt-32 pb-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-secondary/30 via-transparent to-transparent"
+      id="hero"
+    >
+      <div
+        class="container mx-auto px-8 md:px-12 max-w-7xl flex flex-col-reverse md:grid md:grid-cols-2 gap-12 items-center"
+      >
+        <div class="fade-in">
+          <span
+            class="inline-block px-4 py-1.5 bg-secondary text-primary rounded-full text-sm font-bold mb-6 italic"
+            >🏠 Roti Buatan Rumah</span
+          >
+          <h1 class="font-serif text-5xl md:text-6xl leading-tight mb-6">
+            Aroma hangat dari dapur langsung ke mejamu.
+          </h1>
+          <p class="text-lg text-text-muted mb-8 max-w-lg">
+            Tanpa pengawet, dipanggang dengan cinta, dan dikirim saat masih
+            hangat. Karena rumah adalah tempat di mana aroma roti segar berada.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-12">
+            <a
+              href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20roti%20segar%20hari%20ini."
+              class="inline-block px-7 py-3 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-accent text-white text-center"
+              >Pesan Sekarang</a
+            >
+            <a
+              href="#promo"
+              class="inline-block px-7 py-3 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer border-2 border-primary text-primary text-center"
+              >Lihat Promo</a
+            >
+          </div>
+          <div class="flex gap-10">
+            <div>
+              <strong
+                class="block text-3xl text-primary font-serif counter"
+                data-target="50"
+                data-suffix="+"
+                >0+</strong
+              ><span class="text-sm text-text-muted">Pesanan/Hari</span>
             </div>
-            <div class="fade-in group w-full max-w-md mx-auto md:max-w-none">
-                <div class="relative transition-all duration-300 hover-bounce cursor-pointer">
-                    <div class="absolute -inset-4 bg-secondary/20 rounded-[40px] -rotate-3 blur-sm"></div>
-                    <img src="img/hero.jpeg" alt="Roti segar di dapur" width="600" height="400" class="relative w-full aspect-[4/3] md:aspect-auto md:max-h-[500px] object-cover rounded-[30px] shadow-2xl">
-                </div>
+            <div>
+              <strong
+                class="block text-3xl text-primary font-serif counter"
+                data-target="100"
+                data-suffix="%"
+                >0%</strong
+              ><span class="text-sm text-text-muted">Bahan Alami</span>
             </div>
+            <div>
+              <strong
+                class="block text-3xl text-primary font-serif counter"
+                data-target="10"
+                data-suffix="+"
+                >0+</strong
+              ><span class="text-sm text-text-muted">Jenis Roti</span>
+            </div>
+          </div>
         </div>
+        <div class="fade-in group w-full max-w-md mx-auto md:max-w-none">
+          <div
+            class="relative transition-all duration-300 hover-bounce cursor-pointer"
+          >
+            <div
+              class="absolute -inset-4 bg-secondary/20 rounded-[40px] -rotate-3 blur-sm"
+            ></div>
+            <img
+              src="img/hero.jpeg"
+              alt="Roti segar di dapur"
+              width="600"
+              height="400"
+              class="relative w-full aspect-[4/3] md:aspect-auto md:max-h-[500px] object-cover rounded-[30px] shadow-2xl"
+            />
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Daily Promo -->
     <section id="promo" class="py-20 bg-white/30">
-        <div class="container mx-auto px-8 md:px-12 max-w-7xl">
-            <div class="bg-white rounded-[40px] grid md:grid-cols-2 overflow-hidden shadow-xl fade-in hover-shake cursor-pointer">
-                <div class="h-80 md:h-[450px]">
-                    <img src="img/hero2.jpeg" alt="Promo Hari Ini" width="600" height="400" class="w-full h-full object-cover">
-                </div>
-                <div class="p-10 md:p-16 flex flex-col justify-center">
-                    <span class="text-accent font-extrabold uppercase tracking-widest text-sm mb-4">PROMO AKHIR PEKAN</span>
-                    <h2 class="font-serif text-4xl mb-6">Manisnya Kehangatan!</h2>
-                    <p class="text-lg mb-8 text-text-muted">Dapatkan <strong>Diskon 10%</strong> untuk semua varian Cinnamon Roll setiap pembelian minimal 2 paket. Stok terbatas, habis dalam hitungan jam!</p>
-                    <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20ambil%20promo%20cinnamon%20roll%20hari%20ini." class="inline-block px-7 py-3 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white w-fit">Ambil Promo via WA</a>
-                </div>
-            </div>
+      <div class="container mx-auto px-8 md:px-12 max-w-7xl">
+        <div
+          class="bg-white rounded-[40px] grid md:grid-cols-2 overflow-hidden shadow-xl fade-in hover-shake cursor-pointer"
+        >
+          <div class="h-80 md:h-[450px]">
+            <img
+              src="img/hero2.jpeg"
+              alt="Promo Hari Ini"
+              width="600"
+              height="400"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-10 md:p-16 flex flex-col justify-center">
+            <span
+              class="text-accent font-extrabold uppercase tracking-widest text-sm mb-4"
+              >PROMO AKHIR PEKAN</span
+            >
+            <h2 class="font-serif text-4xl mb-6">Manisnya Kehangatan!</h2>
+            <p class="text-lg mb-8 text-text-muted">
+              Dapatkan <strong>Diskon 10%</strong> untuk semua varian Cinnamon
+              Roll setiap pembelian minimal 2 paket. Stok terbatas, habis dalam
+              hitungan jam!
+            </p>
+            <a
+              href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20ambil%20promo%20cinnamon%20roll%20hari%20ini."
+              class="inline-block px-7 py-3 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white w-fit"
+              >Ambil Promo via WA</a
+            >
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Why Us -->
     <section class="py-24">
-        <div class="container mx-auto px-8 md:px-12 max-w-7xl">
-            <h2 class="font-serif text-4xl text-center mb-16">Kenapa Rotiku Berbeda?</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-10 rounded-3xl text-center shadow-sm hover:shadow-md transition-shadow fade-in">
-                    <div class="text-5xl mb-6">🌿</div>
-                    <h3 class="font-serif text-xl mb-4">Bahan Pilihan</h3>
-                    <p class="text-text-muted">Hanya menggunakan tepung organik dan ragi alami tanpa pengawet tambahan.</p>
-                </div>
-                <div class="bg-white p-10 rounded-3xl text-center shadow-sm hover:shadow-md transition-shadow fade-in">
-                    <div class="text-5xl mb-6">🔥</div>
-                    <h3 class="font-serif text-xl mb-4">Freshly Baked</h3>
-                    <p class="text-text-muted">Roti dipanggang setiap subuh untuk memastikan kesegaran maksimal saat tiba di rumahmu.</p>
-                </div>
-                <div class="bg-white p-10 rounded-3xl text-center shadow-sm hover:shadow-md transition-shadow fade-in">
-                    <div class="text-5xl mb-6">👵</div>
-                    <h3 class="font-serif text-xl mb-4">Resep Rahasia</h3>
-                    <p class="text-text-muted">Warisan turun-temurun dari dapur nenek yang memberikan rasa "homey" yang tak terlupakan.</p>
-                </div>
-            </div>
+      <div class="container mx-auto px-8 md:px-12 max-w-7xl">
+        <h2 class="font-serif text-4xl text-center mb-16">
+          Kenapa Rotiku Berbeda?
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="bg-white p-10 rounded-3xl text-center shadow-sm hover:shadow-md transition-shadow fade-in"
+          >
+            <div class="text-5xl mb-6">🌿</div>
+            <h3 class="font-serif text-xl mb-4">Bahan Pilihan</h3>
+            <p class="text-text-muted">
+              Hanya menggunakan tepung organik dan ragi alami tanpa pengawet
+              tambahan.
+            </p>
+          </div>
+          <div
+            class="bg-white p-10 rounded-3xl text-center shadow-sm hover:shadow-md transition-shadow fade-in"
+          >
+            <div class="text-5xl mb-6">🔥</div>
+            <h3 class="font-serif text-xl mb-4">Freshly Baked</h3>
+            <p class="text-text-muted">
+              Roti dipanggang setiap subuh untuk memastikan kesegaran maksimal
+              saat tiba di rumahmu.
+            </p>
+          </div>
+          <div
+            class="bg-white p-10 rounded-3xl text-center shadow-sm hover:shadow-md transition-shadow fade-in"
+          >
+            <div class="text-5xl mb-6">👵</div>
+            <h3 class="font-serif text-xl mb-4">Resep Rahasia</h3>
+            <p class="text-text-muted">
+              Warisan turun-temurun dari dapur nenek yang memberikan rasa
+              "homey" yang tak terlupakan.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Products -->
     <section id="produk" class="py-24 bg-secondary/10">
-        <div class="container mx-auto px-8 md:px-12 max-w-7xl">
-            <h2 class="font-serif text-4xl text-center mb-16">Menu Favorit Keluarga</h2>
-            <div class="grid md:grid-cols-3 gap-10">
-                <!-- Product 1 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-md group fade-in">
-                    <div class="h-64 overflow-hidden">
-                        <img src="img/Classic White Sourdough Sandwich Recipe_ Soft, Tangy, and Perfectly Sliceable.jpeg" alt="Sourdough" width="400" height="300" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-xl mb-2">Classic Sourdough</h3>
-                        <p class="text-accent font-bold mb-6 text-lg">Rp 45.000</p>
-                        <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20Classic%20Sourdough." class="inline-block px-8 py-2 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white text-sm">Pesan Langsung</a>
-                    </div>
-                </div>
-                <!-- Product 2 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-md group fade-in">
-                    <div class="h-64 overflow-hidden">
-                        <img src="img/Heavenly Flaky Butter Croissants.jpeg" alt="Croissant" width="400" height="300" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-xl mb-2">Butter Croissant</h3>
-                        <p class="text-accent font-bold mb-6 text-lg">Rp 18.000</p>
-                        <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20Butter%20Croissant." class="inline-block px-8 py-2 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white text-sm">Pesan Langsung</a>
-                    </div>
-                </div>
-                <!-- Product 3 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-md group fade-in">
-                    <div class="h-64 overflow-hidden">
-                        <img src="img/Brown Butter Cinnamon Rolls.jpeg" alt="Cinnamon Roll" width="400" height="300" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-xl mb-2">Cinnamon Roll</h3>
-                        <p class="text-accent font-bold mb-6 text-lg">Rp 22.000</p>
-                        <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20Cinnamon%20Roll." class="inline-block px-8 py-2 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white text-sm">Pesan Langsung</a>
-                    </div>
-                </div>
+      <div class="container mx-auto px-8 md:px-12 max-w-7xl">
+        <h2 class="font-serif text-4xl text-center mb-16">
+          Menu Favorit Keluarga
+        </h2>
+        <div class="grid md:grid-cols-3 gap-10">
+          <!-- Product 1 -->
+          <div
+            class="bg-white rounded-3xl overflow-hidden shadow-md group fade-in"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="img/Classic White Sourdough Sandwich Recipe_ Soft, Tangy, and Perfectly Sliceable.jpeg"
+                alt="Sourdough"
+                width="400"
+                height="300"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
             </div>
-
-            <!-- WhatsApp Catalog Link -->
-            <div class="mt-16 text-center fade-in">
-                <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20lihat%20katalog%20menu%20lengkapnya." class="inline-flex items-center gap-3 text-primary font-bold hover:text-accent transition-colors group">
-                    <span class="border-b-2 border-primary/20 group-hover:border-accent font-sans">Lihat katalog menu di whatsapp</span>
-                    <i class="fa-solid fa-arrow-right text-sm"></i>
-                </a>
+            <div class="p-8 text-center">
+              <h3 class="font-serif text-xl mb-2">Classic Sourdough</h3>
+              <p class="text-accent font-bold mb-6 text-lg">Rp 45.000</p>
+              <a
+                href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20Classic%20Sourdough."
+                class="inline-block px-8 py-2 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white text-sm"
+                >Pesan Langsung</a
+              >
             </div>
+          </div>
+          <!-- Product 2 -->
+          <div
+            class="bg-white rounded-3xl overflow-hidden shadow-md group fade-in"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="img/Heavenly Flaky Butter Croissants.jpeg"
+                alt="Croissant"
+                width="400"
+                height="300"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-8 text-center">
+              <h3 class="font-serif text-xl mb-2">Butter Croissant</h3>
+              <p class="text-accent font-bold mb-6 text-lg">Rp 18.000</p>
+              <a
+                href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20Butter%20Croissant."
+                class="inline-block px-8 py-2 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white text-sm"
+                >Pesan Langsung</a
+              >
+            </div>
+          </div>
+          <!-- Product 3 -->
+          <div
+            class="bg-white rounded-3xl overflow-hidden shadow-md group fade-in"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="img/Brown Butter Cinnamon Rolls.jpeg"
+                alt="Cinnamon Roll"
+                width="400"
+                height="300"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-8 text-center">
+              <h3 class="font-serif text-xl mb-2">Cinnamon Roll</h3>
+              <p class="text-accent font-bold mb-6 text-lg">Rp 22.000</p>
+              <a
+                href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20Cinnamon%20Roll."
+                class="inline-block px-8 py-2 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-primary text-white text-sm"
+                >Pesan Langsung</a
+              >
+            </div>
+          </div>
         </div>
+
+        <!-- WhatsApp Catalog Link -->
+        <div class="mt-16 text-center fade-in">
+          <a
+            href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20lihat%20katalog%20menu%20lengkapnya."
+            class="inline-flex items-center gap-3 text-primary font-bold hover:text-accent transition-colors group"
+          >
+            <span
+              class="border-b-2 border-primary/20 group-hover:border-accent font-sans"
+              >Lihat katalog menu di whatsapp</span
+            >
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Location Map Section -->
     <section id="lokasi" class="py-24">
-        <div class="container mx-auto px-8 md:px-12 max-w-7xl">
-            <h2 class="font-serif text-4xl text-center mb-6">Kunjungi Dapur Kami</h2>
-            <p class="text-center text-text-muted mb-12 max-w-2xl mx-auto">Rasakan langsung aroma roti segar yang baru keluar dari oven. Dapur kami selalu terbuka untuk Anda.</p>
-            <div class="bg-white p-4 rounded-[40px] shadow-xl fade-in overflow-hidden">
-                <div class="aspect-video w-full">
-                    <!-- Google Maps Embed (Jakarta Placeholder) -->
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126932.18520247657!2d106.7766!3d-6.195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e3fa73%3A0xedc348fd71115a41!2sJakarta%20Pusat%2C%20Kota%20Jakarta%20Pusat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1705555600000!5m2!1sid!2sid" 
-                        class="w-full h-full border-0 rounded-[30px]" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Bakery Location Map"
-                    ></iframe>
-                </div>
-                <div class="p-8 text-center md:flex md:justify-between md:items-center">
-                    <div class="mb-4 md:mb-0 text-left">
-                        <h3 class="font-bold text-lg text-primary">Alamat Kami</h3>
-                        <p class="text-text-muted">Jl. Hangat No. 12, Dapur Utama, Jakarta</p>
-                    </div>
-                    <div>
-                        <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3 rounded-full font-bold transition-all duration-300 hover:bg-primary-light bg-primary text-white">Petunjuk Arah</a>
-                    </div>
-                </div>
+      <div class="container mx-auto px-8 md:px-12 max-w-7xl">
+        <h2 class="font-serif text-4xl text-center mb-6">
+          Kunjungi Dapur Kami
+        </h2>
+        <p class="text-center text-text-muted mb-12 max-w-2xl mx-auto">
+          Rasakan langsung aroma roti segar yang baru keluar dari oven. Dapur
+          kami selalu terbuka untuk Anda.
+        </p>
+        <div
+          class="bg-white p-4 rounded-[40px] shadow-xl fade-in overflow-hidden"
+        >
+          <div class="aspect-video w-full">
+            <!-- Google Maps Embed (Jakarta Placeholder) -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126932.18520247657!2d106.7766!3d-6.195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e3fa73%3A0xedc348fd71115a41!2sJakarta%20Pusat%2C%20Kota%20Jakarta%20Pusat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1705555600000!5m2!1sid!2sid"
+              class="w-full h-full border-0 rounded-[30px]"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Bakery Location Map"
+            ></iframe>
+          </div>
+          <div
+            class="p-8 text-center md:flex md:justify-between md:items-center"
+          >
+            <div class="mb-4 md:mb-0 text-left">
+              <h3 class="font-bold text-lg text-primary">Alamat Kami</h3>
+              <p class="text-text-muted">
+                Jl. Hangat No. 12, Dapur Utama, Jakarta
+              </p>
             </div>
+            <div>
+              <a
+                href="https://maps.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-8 py-3 rounded-full font-bold transition-all duration-300 hover:bg-primary-light bg-primary text-white"
+                >Petunjuk Arah</a
+              >
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer / Final CTA -->
-    <footer class="relative bg-cover bg-center text-white" style="background-image: url('img/footer.jpeg');">
-        <!-- Black Overlay -->
-        <div class="absolute inset-0 bg-black/60"></div>
-        
-        <div class="container mx-auto px-8 md:px-12 max-w-7xl text-center relative z-10 py-20">
-            <h2 class="font-serif text-4xl mb-6 fade-in">Kangen Wangi Roti Rumah?</h2>
-            <p class="text-xl mb-10 text-secondary/80 fade-in">Pesan hari ini untuk dapatkan harga spesial.</p>
-            <a href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20roti%20segar%20sekarang." class="inline-block px-12 py-5 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-accent text-white text-lg shadow-2xl fade-in">Order via WhatsApp Now</a>
-            
-            <div class="mt-32 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-                <p class="text-white">&copy; 2026 Rotiku. All rights reserved.</p>
-                <div class="flex space-x-6 text-2xl font-bold">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors" aria-label="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors" aria-label="Facebook">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors" aria-label="Twitter">
-                        <i class="fa-brands fa-x-twitter"></i>
-                    </a>
-                </div>
-            </div>
+    <footer
+      class="relative bg-cover bg-center text-white"
+      style="background-image: url(&quot;img/footer.jpeg&quot;)"
+    >
+      <!-- Black Overlay -->
+      <div class="absolute inset-0 bg-black/60"></div>
+
+      <div
+        class="container mx-auto px-8 md:px-12 max-w-7xl text-center relative z-10 py-20"
+      >
+        <h2 class="font-serif text-4xl mb-6 fade-in">
+          Kangen Wangi Roti Rumah?
+        </h2>
+        <p class="text-xl mb-10 text-secondary/80 fade-in">
+          Pesan hari ini untuk dapatkan harga spesial.
+        </p>
+        <a
+          href="https://wa.me/628123456789?text=Halo%20Rotiku%2C%20saya%20mau%20order%20roti%20segar%20sekarang."
+          class="inline-block px-12 py-5 rounded-full font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg cursor-pointer bg-accent text-white text-lg shadow-2xl fade-in"
+          >Order via WhatsApp Now</a
+        >
+
+        <div
+          class="mt-32 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <p class="text-white">&copy; 2026 Rotiku. All rights reserved.</p>
+          <div class="flex space-x-6 text-2xl font-bold">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-accent transition-colors"
+              aria-label="Instagram"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-accent transition-colors"
+              aria-label="Facebook"
+            >
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-accent transition-colors"
+              aria-label="Twitter"
+            >
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+          </div>
         </div>
+      </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#hero" id="back-to-top" class="fixed bottom-8 left-8 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-2xl z-50 hover:scale-110 transition-all duration-300 opacity-0 invisible">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8 text-white">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-        </svg>
+    <a
+      href="#hero"
+      id="back-to-top"
+      class="fixed bottom-8 left-8 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-2xl z-50 hover:scale-110 transition-all duration-300 opacity-0 invisible"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="w-8 h-8 text-white"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4.5 15.75l7.5-7.5 7.5 7.5"
+        />
+      </svg>
     </a>
 
-    <script src="script.js"></script>
-</body>
+    <script src="script.js" defer></script>
+  </body>
 </html>
